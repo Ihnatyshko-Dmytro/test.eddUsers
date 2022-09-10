@@ -1,0 +1,152 @@
+$blue-color: #2C7DFA;
+
+@mixin input() {
+    width: 100%;
+    height: 38px;
+    padding: 6px 10px;
+    margin: 0;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}
+
+input::placeholder{
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.elementsForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.blocks {
+    width: 46.67%;
+    height: 70px;
+    padding: 10px;
+}
+
+.labalToForms {
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+    display: block;
+    z-index: 0;
+}
+
+.forminput {
+    @include input();
+    display: block;
+}
+
+
+.dropdown {
+    @include input();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0;
+
+    @mixin icons () {
+        margin: 0;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 15px;
+        height: 15px;
+    }
+
+    &__icon--close {
+        background-image: url(../AddUsers/Images/close.svg);
+        @include icons ()
+    }
+
+    &__icon--open {
+        position: relative;
+        top: 3px;
+        background-image: url(../AddUsers/Images/arrow_down.svg);
+        @include icons ()
+    }
+
+
+}
+
+.customSelect {
+    position: relative;
+
+    &Items {
+        list-style-type: none;
+        
+        position: absolute;
+        display: none;
+        top: 38px;
+
+        &--show {
+            display: block;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0.1px 3px 8px rgba(61, 78, 97, 0.2);
+        }
+
+        &__item {
+
+            @include input();
+            border-radius: 0;
+            border: 0;
+            border-bottom: 1px solid #ddd;
+            ;
+            margin: 0;
+            z-index: 99999;
+            background-color: #ffffff;
+        }
+
+        &__item:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+
+
+.labelRadio {
+    display: inline;
+    margin-left: 5px;
+}
+
+.radio {
+    position: relative;
+    top: 1px;
+    display: inline;
+}
+
+.foterForm {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    padding: 0 10px 10px 10px;
+
+    &__buttonAddInput {
+        height: 20px;
+        border: 0;
+        background: none;
+        display: block;
+        color: $blue-color;
+        text-decoration: underline;
+    }
+
+    &__buttonSubmit {
+        font-size: 16px;
+        color: $blue-color;
+        border: 1px solid $blue-color;
+        border-radius: 4px;
+        background: none;
+        font-weight: 500;
+        height: 40px;
+        width: 190px;
+        display: block;
+    }
+}

@@ -1,0 +1,72 @@
+.addUser {
+    width: 605px;
+    max-height: 1000px;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0.1px 3px 8px rgba(61, 78, 97, 0.2);
+  }
+  
+  
+  .formTitle {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    height: 50px;
+  
+  
+    margin: 0;
+  
+    &__h3 {
+        margin: 0;
+        line-height: 50px;
+        padding-left: 17px;
+    }
+
+    &__h3::before{
+        content: url(./Images/add_24px.svg);
+        width: 17px;
+        height: 17px;
+        padding-right: 17px;
+    }
+  
+    @mixin icons () {
+      margin: 0;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      width: 15px;
+      height: 15px;
+    }
+  
+    &--close {
+      @include icons();
+      background-image: url(./Images/close.svg);
+      line-height: 50px;
+    }
+  
+    &--open {
+      @include icons();
+      background-image: url(./Images/arrow_down.svg);
+      line-height: 50px;
+    }
+  }
+  
+  .formBody {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0,1,0,1)
+  }
+  
+  .formBody.show {
+    max-height: 1000px;
+    border-top: 1px solid #ddd;
+    transition: all 0.1s cubic-bezier(1,0,1,0);
+    overflow: inherit;
+  }
+  
+    .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
