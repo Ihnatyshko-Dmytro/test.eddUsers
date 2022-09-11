@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/test.eddUsers/static/css/main.517f5ca7.css",
+    "main.js": "/test.eddUsers/static/js/main.0734d172.js",
+    "index.html": "/test.eddUsers/index.html",
+    "static/media/close.svg": "/test.eddUsers/static/media/close.79acd0738367ee036b5e.svg",
+    "static/media/arrow_down.svg": "/test.eddUsers/static/media/arrow_down.23b14f1488f0e77a59a3.svg",
+    "static/media/add_24px.svg": "/test.eddUsers/static/media/add_24px.18298d7a6054a303e610.svg",
+    "main.517f5ca7.css.map": "/test.eddUsers/static/css/main.517f5ca7.css.map",
+    "main.0734d172.js.map": "/test.eddUsers/static/js/main.0734d172.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.517f5ca7.css",
+    "static/js/main.0734d172.js"
+  ]
+}
