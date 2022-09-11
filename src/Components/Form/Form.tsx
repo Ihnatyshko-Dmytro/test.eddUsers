@@ -6,21 +6,22 @@ import './style.scss'
 
 export const Form: React.FC = () => {
 
-    const [userPhoneNumber, setUserPhoneNumber] = useState<string | null>(null);
-    const [userName, setUserName] = useState<string | null>(null);
-    const [lastName, setLastName] = useState<string | null>(null);
-    const [email, setEmail] = useState<string | null>(null);
-    const [workplace, setWorkplace] = useState<string | null>(null);
-    const [checkedLanguage, setChecketLanguage] = useState<string | null>(null);
-    const [newInput, setNewInput] = useState<string | null>(null);
-    const [newInputValue, setNewInputValue] = useState<string | null>(null);
+    const [userPhoneNumber, setUserPhoneNumber] = useState<string>('');
+    const [userName, setUserName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [workplace, setWorkplace] = useState<string>('');
+    const [checkedLanguage, setChecketLanguage] = useState<string>('');
+    const [newInput, setNewInput] = useState<string>('');
+    const [newInputValue, setNewInputValue] = useState<string>('');
 
     const submit = (event: any) => {
-        event.preventDefault()
+        event.preventDefault();
+        clearIput()
         axios({
             method: 'post',
             url: 'https://botpashatesting.inboost.ai/api/MyClients/AddNewClient',
-            headers: {  Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxMDA0NDkwIiwiUm9sZUlkIjoiNCIsIlBvcnRhbElkIjoiMTAyNDI0Iiwicm9sZSI6IlBvcnRhbEFkbWluIiwibmJmIjoxNjYyMDExNzcwLCJleHAiOjE2Nzc2NTAxNzAsImlhdCI6MTY2MjAxMTc3MH0.xRegVe8mVkCf8JzD5xp6g7DDHDqtwX5tK550CZTFuhk' },
+            headers: { Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxMDA0NDkwIiwiUm9sZUlkIjoiNCIsIlBvcnRhbElkIjoiMTAyNDI0Iiwicm9sZSI6IlBvcnRhbEFkbWluIiwibmJmIjoxNjYyMDExNzcwLCJleHAiOjE2Nzc2NTAxNzAsImlhdCI6MTY2MjAxMTc3MH0.xRegVe8mVkCf8JzD5xp6g7DDHDqtwX5tK550CZTFuhk' },
             data: {
                 "userPhoneNumber": userPhoneNumber,
                 "userName": userName,
@@ -28,17 +29,16 @@ export const Form: React.FC = () => {
                 "email": email,
                 "workplace": workplace,
                 "lang": checkedLanguage,
-                "profession" : newInputValue,
+                "profession": newInputValue,
                 "idRole": "de9b62b2-1ba9-4393-b191-efb19e05b22e"
             },
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     const groupRef = React.createRef<HTMLDivElement>();
     const addInputRef = React.createRef<HTMLDivElement>();
@@ -48,8 +48,7 @@ export const Form: React.FC = () => {
         event.stopPropagation();
         setWorkplace(event.target.id)
         if (groupRef.current !== null) {
-            const element: HTMLDivElement = groupRef.current;
-            element.textContent = event.target.textContent;
+            groupRef.current.textContent = event.target.textContent;
             setToggleGroup(!toggleGroup);
         }
     };
@@ -61,6 +60,26 @@ export const Form: React.FC = () => {
             addNewInputRef.current.textContent = event.target.textContent;
             setToggleNewInput(!toggleNewInput);
         };
+    }
+    const clearIput = () => {
+        setUserPhoneNumber('')
+        setUserName('')
+        setLastName('')
+        setEmail('')
+        setWorkplace('')
+        setChecketLanguage('')
+        setNewInput('')
+        setNewInputValue('')
+        if (groupRef.current !== null) {
+            groupRef.current.textContent = 'Оберіть групу';
+        }
+        if (addInputRef.current !== null && addNewInputRef.current !== null) {
+            addInputRef.current.textContent = 'Оберіть поле';
+            addNewInputRef.current.textContent = 'Значення поля';
+        };
+        setToggleLanguage(false)
+        setToggleNewInput(false)
+        setToggleGroup(false)
     }
 
     const [toggleLanguage, setToggleLanguage] = useState(false);
@@ -102,12 +121,14 @@ export const Form: React.FC = () => {
                     <div className="blocks">
                         <label htmlFor="name" className="labalToForms">Ім'я</label>
                         <input type="text" id='name' name='name' className="forminput" placeholder='Марина'
+                            value={userName}
                             onChange={inputName} />
                     </div>
 
                     <div className="blocks">
                         <label htmlFor="lastname" className="labalToForms">Прізвище</label>
                         <input type="text" id='lastname' name='lastname' className="forminput" placeholder='Коноваленко'
+                            value={lastName}
                             onChange={inputLastname}
                         />
                     </div>
@@ -115,6 +136,7 @@ export const Form: React.FC = () => {
                     <div className="blocks">
                         <label htmlFor="phonenumber" className="labalToForms">Номер телефону</label>
                         <input type="text" id='phonenumber' name='phonenumber' className="forminput" placeholder='1(999) 999-9999'
+                            value={userPhoneNumber}
                             onChange={inputUserPhoneNumber}
                         />
                     </div>
@@ -122,6 +144,7 @@ export const Form: React.FC = () => {
                     <div className="blocks">
                         <label htmlFor="email" className="labalToForms">Email</label>
                         <input type="text" id='email' name='email' className="forminput" placeholder='example.com'
+                            value={email}
                             onChange={inputEmail}
                         />
                     </div>
@@ -135,9 +158,13 @@ export const Form: React.FC = () => {
                             </div>
                             <ul className={toggleGroup ? "customSelectItems--show" : "customSelectItems"}>
                                 <li className="customSelectItems__item"
+                                    id={''}
+                                    onClick={dropGR}
+                                >Оберіть групу</li>
+                                <li className="customSelectItems__item"
                                     id={'group1'}
                                     onClick={dropGR}
-                                >Group1</li>
+                                >Група 1</li>
                             </ul>
                         </div>
                     </div>
@@ -153,32 +180,44 @@ export const Form: React.FC = () => {
                                 <li className="customSelectItems__item" >
                                     <input type="radio" id='EN' className='radio'
                                         checked={checkedLanguage === 'EN'}
-                                        onChange={() => {setChecketLanguage('EN');
-                                        toggleLAN()}}
+                                        onClick={() => { setTimeout(toggleLAN, 200); }}
+                                        onChange={() => {
+                                            setChecketLanguage('EN');
+                                            setTimeout(toggleLAN, 200);
+                                        }}
                                     />
                                     <label htmlFor="EN" className='labelRadio'>Англійська</label>
                                 </li>
                                 <li className="customSelectItems__item" >
                                     <input type="radio" id='UA' className='radio'
                                         checked={checkedLanguage === 'UA'}
-                                        onChange={() => {setChecketLanguage('UA')
-                                        toggleLAN()}}
+                                        onClick={() => { setTimeout(toggleLAN, 200); }}
+                                        onChange={() => {
+                                            setChecketLanguage('UA')
+                                            setTimeout(toggleLAN, 200);
+                                        }}
                                     />
                                     <label htmlFor="UA" className='labelRadio'>Україська</label>
                                 </li>
                                 <li className="customSelectItems__item" >
                                     <input type="radio" id='DE' className='radio'
                                         checked={checkedLanguage === 'DE'}
-                                        onChange={() => {setChecketLanguage('DE');
-                                        toggleLAN()}}
+                                        onClick={() => { setTimeout(toggleLAN, 200); }}
+                                        onChange={() => {
+                                            setChecketLanguage('DE');
+                                            setTimeout(toggleLAN, 200);
+                                        }}
                                     />
                                     <label htmlFor="DE" className='labelRadio'>Німецька</label>
                                 </li>
                                 <li className="customSelectItems__item" >
                                     <input type="radio" id='FR' className='radio'
+                                        onClick={() => { setTimeout(toggleLAN, 200); }}
                                         checked={checkedLanguage === 'FR'}
-                                        onChange={() => {setChecketLanguage('FR');
-                                        toggleLAN()}}
+                                        onChange={() => {
+                                            setChecketLanguage('FR');
+                                            setTimeout(toggleLAN, 200);
+                                        }}
                                     />
                                     <label htmlFor="FR" className='labelRadio'>Французька</label>
                                 </li>
@@ -194,6 +233,7 @@ export const Form: React.FC = () => {
                                 <div className={toggleNewInput ? "dropdown__icon--close" : "dropdown__icon--open"}></div>
                             </div>
                             <ul className={toggleNewInput ? "customSelectItems--show" : "customSelectItems"}>
+                                <li className="customSelectItems__item" onClick={dropIN} id="">Оберіть поле</li>
                                 <li className="customSelectItems__item" onClick={dropIN} id="placeOfWork">Місце роботи</li>
                                 <li className="customSelectItems__item" onClick={dropIN} id="job">Професія</li>
                                 <li className="customSelectItems__item" onClick={dropIN} id="age">Вік</li>
@@ -205,6 +245,7 @@ export const Form: React.FC = () => {
                     <div className="blocks">
                         <label htmlFor="lastname" className="labalToForms" ref={addNewInputRef}>Значення поля</label>
                         <input type="text" id='lastname' name='lastname' className="forminput" placeholder='Введіть значення'
+                            value={newInputValue}
                             onChange={inputNewInputValue}
                         />
                     </div>
